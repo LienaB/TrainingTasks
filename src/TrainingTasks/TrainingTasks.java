@@ -33,6 +33,8 @@ public class TrainingTasks {
         System.out.println(isArraySorted(arr3, SortType.Descending));
         System.out.println(isArraySorted(arr4, SortType.Ascending));
         System.out.println(isArraySorted(arr4, SortType.Descending));
+        System.out.println(findAmountOfElementsOverAverage(arr2));
+
 
     }
 ////////////////////////////////////////////////////////////////////////////////////
@@ -122,15 +124,13 @@ public class TrainingTasks {
     // знайти середнє значення елементів в масиві
 
     public static double getAverageOfElements(int[] arr) {
-        int count = 0;
         double sumOfElements = 0;
         double averageOfElements = 0;
 
         for(int i = 0; i < arr.length; i++) {
             sumOfElements += arr[i];
-            count++;
         }
-        averageOfElements = sumOfElements / count;
+        averageOfElements = sumOfElements / arr.length;
         return averageOfElements;
     }
 
@@ -286,7 +286,20 @@ public class TrainingTasks {
 
     // циклічний зсув елементів на к позицій вправо
     // вивести елементи, значення яких дорівнюють іншим елементам в масиві
+
     // знайти кількість елементів, більших за середнє значення
+
+    public static int findAmountOfElementsOverAverage(int[] arr) {
+        double averageOfArray = getAverageOfElements(arr);
+        int count = 0;
+        for(int i = 0; i < arr.length; i++) {
+            if(arr[i] > averageOfArray) {
+                count++;
+            }
+        }
+        return count;
+    }
+
     // вивести елементи, значення яких не дорівнюють значенням інших елементів в масиві
     // вивести елементи одного масиву, які не дорівнюють елементам другого масиву
     // порахувати скільки в масиві елементів з таким же значенням, як і перший
