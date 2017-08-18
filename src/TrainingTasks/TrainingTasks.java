@@ -7,10 +7,10 @@ public class TrainingTasks {
 
         int[] arr1 = new int[]{1, 8, 7, 999, 6, -3, 7};
         int[] arr2 = new int[]{8, 5, 3, 9, 6, 2, 7, 8, 8};
-        int[] arr3 = new int[]{8, 5, 3, 2, 2, 2, 1, -6, -8};
+        int[] arr3 = new int[]{15, 8, 8, 8, 5, 3, 2, 2, 2, 1, -6, -8};
         int[] arr4 = new int[]{-9, -6, 8, 15, 32, 42, 52, 62, 100, 6666};
-
-
+        int[] arr5 = new int[] {7, 7, 8, 8, 8, 8, 9, 9, 8};
+        int[] arr6 = new int[] {1, 8, 9};
 
         System.out.println(findMaxElementInArray(arr1));
         System.out.println(findMinElementInArray(arr1));
@@ -34,6 +34,10 @@ public class TrainingTasks {
         System.out.println(isArraySorted(arr4, SortType.Ascending));
         System.out.println(isArraySorted(arr4, SortType.Descending));
         System.out.println(findAmountOfElementsOverAverage(arr2));
+        System.out.println(getNumberOfElementsEqualFirst(arr3));
+        System.out.println(Arrays.toString(getIndexesOfElementInArray(arr5, 8)));
+        System.out.println(swapPositiveElements(arr5));
+
 
 
     }
@@ -264,7 +268,24 @@ public class TrainingTasks {
     }
 
     // знайти індекси входження елемента в масив
-    int e;
+    // TODO рагульня якась, а не рішення
+
+    public static int[] getIndexesOfElementInArray (int[] arr, int element) {
+        int count = 0;
+        for (int i = 0; i < arr.length; i++) {
+            if (arr[i] == element) {
+                count++;
+            }
+        }
+        int[] newArray = new int[count];
+        int j = 0;
+        for (int i = 0; i < arr.length; i++) {
+            if (arr[i] == element) {
+                newArray[j++] = i;
+            }
+        }
+        return newArray;
+    }
     // перевірити масив на впорядкованість за зростанням / спаданням
 
     enum SortType
@@ -284,15 +305,24 @@ public class TrainingTasks {
         return true;
     }
 
-    // циклічний зсув елементів на к позицій вправо
-    // вивести елементи, значення яких дорівнюють іншим елементам в масиві
+    // TODO циклічний зсув елементів на к позицій вправо
+
+    // TODO вивести елементи, значення яких дорівнюють іншим елементам в масиві
+
+//    public static List findNotUniqueElements (int[] arr) {
+//        List<Integer> notUniqueElements = new ArrayList();
+//        boolean flag = false;
+//        for (int i = 0; i < arr.length; i++) {
+//            if (arr[i] !=)
+//        }
+//    }
 
     // знайти кількість елементів, більших за середнє значення
 
     public static int findAmountOfElementsOverAverage(int[] arr) {
         double averageOfArray = getAverageOfElements(arr);
         int count = 0;
-        for(int i = 0; i < arr.length; i++) {
+        for (int i = 0; i < arr.length; i++) {
             if(arr[i] > averageOfArray) {
                 count++;
             }
@@ -301,39 +331,58 @@ public class TrainingTasks {
     }
 
     // вивести елементи, значення яких не дорівнюють значенням інших елементів в масиві
-    // вивести елементи одного масиву, які не дорівнюють елементам другого масиву
+
+
+
+    // TODO вивести елементи одного масиву, які не дорівнюють елементам другого масиву
+
+    // TODO не працює алгоритм
+
+//    public static List uniqueElements (int[] arr, int[] arr1) {
+//        List<Integer> uniqueElements = new ArrayList();
+//        for (int i = 0; i < arr.length; i++) {
+//            for (int j = 0; j < arr1.length; j++) {
+//                if (arr[i] != arr1[j]) {
+//                    uniqueElements.add(arr[i]);
+//                }
+//            }
+//        }
+//        return uniqueElements;
+//    }
+
     // порахувати скільки в масиві елементів з таким же значенням, як і перший
-    // з двох відсортованих масивів зробити третій відсортований, не сортуючи його
 
-    // поміняти місцями перший додатній елемент з останнім, другий з передостаннім...
+    public static int getNumberOfElementsEqualFirst(int[] arr) {
+        int count = 0;
+        for (int i = 0; i < arr.length; i++) {
+            if (arr[i] == arr[0]) {
+                count++;
+            }
+        }
+        return count;
+    }
 
-   /* public static int[] swapPositiveElements(int[] arr) {
+    // TODO з двох відсортованих масивів зробити третій відсортований, не сортуючи його
+
+    // TODO поміняти місцями перший додатній елемент з останнім, другий з передостаннім...
+
+    public static List swapPositiveElements(int[] arr) {
+        int temp;
+        List<Integer> swappedArray = new ArrayList();
+
         for(int i = 0; i < arr.length; i++) {
             if(arr[i] > 0) {
-                for (int j = 0; i < arr.length; j++)
-                {
-                    if (arr[i] == maxValue)
-                    {
-                        firstEntry1 = i;
-
-                        break;
-                    }
-                }
-                for (int k = arr.Length - 1; k >= 0; k--)
-                {
-                    if (entryMaxValue[i] == max2)
-                    {
-                        lastEntry1 = i;
-
-                        break;
+                for (int k = arr.length - 1; k >= 0; k--) {
+                    if (arr[k] > 0) {
+                        swappedArray.set(k, arr[i]);
                     }
                 }
             }
         }
         return swappedArray;
-    }*/
+    }
 
-
+////////////////////////////////////////////////////////////////////////////////////////////
 // знайти індекс входження елемента в масив
 
 
