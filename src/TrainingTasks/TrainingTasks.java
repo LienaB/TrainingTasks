@@ -11,6 +11,7 @@ public class TrainingTasks {
         int[] arr4 = new int[]{-9, -6, 8, 15, 32, 42, 52, 62, 100, 6666};
         int[] arr5 = new int[] {7, 7, 8, 8, 8, 8, 9, 9, 8};
         int[] arr6 = new int[] {1, 8, 9};
+        int[] arr7 = new int[] {18, 1, 8, 9, 6, 4, 2, 1, 10, 12};
 
         System.out.println(findMaxElementInArray(arr1));
         System.out.println(findMinElementInArray(arr1));
@@ -36,7 +37,8 @@ public class TrainingTasks {
         System.out.println(findAmountOfElementsOverAverage(arr2));
         System.out.println(getNumberOfElementsEqualFirst(arr3));
         System.out.println(Arrays.toString(getIndexesOfElementInArray(arr5, 8)));
-        System.out.println(swapPositiveElements(arr5));
+        //System.out.println(Arrays.toString(swapPositiveElements(arr7)));
+       // System.out.println(uniqueElements(arr5,arr6));
 
 
 
@@ -330,7 +332,7 @@ public class TrainingTasks {
         return count;
     }
 
-    // вивести елементи, значення яких не дорівнюють значенням інших елементів в масиві
+    // TODO вивести елементи, значення яких не дорівнюють значенням інших елементів в масиві
 
 
 
@@ -342,9 +344,11 @@ public class TrainingTasks {
 //        List<Integer> uniqueElements = new ArrayList();
 //        for (int i = 0; i < arr.length; i++) {
 //            for (int j = 0; j < arr1.length; j++) {
-//                if (arr[i] != arr1[j]) {
-//                    uniqueElements.add(arr[i]);
-//                }
+//
+////                if (arr[i] != arr1[j]) {
+////                    j++;
+////                }
+//                //uniqueElements.add(arr[i]);
 //            }
 //        }
 //        return uniqueElements;
@@ -366,21 +370,24 @@ public class TrainingTasks {
 
     // TODO поміняти місцями перший додатній елемент з останнім, другий з передостаннім...
 
-    public static List swapPositiveElements(int[] arr) {
-        int temp;
-        List<Integer> swappedArray = new ArrayList();
-
-        for(int i = 0; i < arr.length; i++) {
-            if(arr[i] > 0) {
-                for (int k = arr.length - 1; k >= 0; k--) {
-                    if (arr[k] > 0) {
-                        swappedArray.set(k, arr[i]);
-                    }
-                }
-            }
-        }
-        return swappedArray;
-    }
+//    public static int[] swapPositiveElements(int[] arr) {
+//        int swap = 0;
+//        int i = 0;
+//        int j = 0;
+//        for (i = 0; i < arr.length; i++) {
+//            if (arr[i] % 2 == 0) {
+//                swap = arr[i];
+//                for (j = arr.length - 1; j >=0; j--) {
+//                    if (arr[j] % 2 == 0) {
+//                        arr[i] = arr[j];
+//                        arr[j] = swap;
+//                    }
+//                }
+//            }
+//        }
+//
+//        return arr;
+//    }
 
 ////////////////////////////////////////////////////////////////////////////////////////////
 // знайти індекс входження елемента в масив
