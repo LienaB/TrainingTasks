@@ -9,9 +9,10 @@ public class TrainingTasks {
         int[] arr2 = new int[]{8, 5, 3, 9, 6, 2, 7, 8, 8};
         int[] arr3 = new int[]{15, 8, 8, 8, 5, 3, 2, 2, 2, 1, -6, -8};
         int[] arr4 = new int[]{-9, -6, 8, 15, 32, 42, 52, 62, 100, 6666};
-        int[] arr5 = new int[] {7, 7, 8, 8, 8, 8, 9, 9, 8};
-        int[] arr6 = new int[] {1, 8, 9};
-        int[] arr7 = new int[] {18, 1, 8, 9, 6, 4, 2, 1, 10, 12};
+        int[] arr5 = new int[]{7, 7, 8, 8, 8, 8, 9, 9, 8};
+        int[] arr6 = new int[]{1, 2, 3, 4, 5};
+        int[] arr7 = new int[]{18, 1, 8, 9, 6, 4, 2, 1, 10, 12};
+        int[] arr8 = new int[]{-5, 8, -9, -8, 8, 6, 3, 4};
 
         System.out.println(findMaxElementInArray(arr1));
         System.out.println(findMinElementInArray(arr1));
@@ -37,9 +38,10 @@ public class TrainingTasks {
         System.out.println(findAmountOfElementsOverAverage(arr2));
         System.out.println(getNumberOfElementsEqualFirst(arr3));
         System.out.println(Arrays.toString(getIndexesOfElementInArray(arr5, 8)));
-        //System.out.println(Arrays.toString(swapPositiveElements(arr7)));
-       // System.out.println(uniqueElements(arr5,arr6));
-
+        System.out.println(Arrays.toString(cycleShift(arr6, 3)));
+        System.out.println(Arrays.toString(swapPositiveElements(arr8)));
+        System.out.println(uniqueElements(arr7));
+        System.out.println(nonUniqueElements(arr7));
 
 
     }
@@ -72,7 +74,7 @@ public class TrainingTasks {
 
     public static int[] replaceEvenNumbers(int[] arr) {
         int[] changedArray = new int[arr.length];
-        for(int i = 0; i < arr.length; i++) {
+        for (int i = 0; i < arr.length; i++) {
             changedArray[i] = (arr[i] % 2 == 0) ? 0 : arr[i];
         }
         return changedArray;
@@ -81,11 +83,11 @@ public class TrainingTasks {
     // замінити нулями всі непарні елементи в масиві
 
     public static int[] replaceOddNumbers(int[] arr) {
-        int[] changedArray1 = new int[arr.length];
-        for(int i = 0; i < arr.length; i++) {
-            changedArray1[i] = (arr[i] % 2 != 0) ? 0 : arr[i];
+        int[] changedArray = new int[arr.length];
+        for (int i = 0; i < arr.length; i++) {
+            changedArray[i] = (arr[i] % 2 != 0) ? 0 : arr[i];
         }
-        return changedArray1;
+        return changedArray;
     }
 
     // знайти індекс мінімального значення в масиві
@@ -93,8 +95,8 @@ public class TrainingTasks {
     public static int findMinValueInArray(int[] arr) {
         int indexOfMinValue = 0;
         int temp1 = arr[0];
-        for(int i = 0; i < arr.length; i++) {
-            if(arr[i] < temp1) {
+        for (int i = 0; i < arr.length; i++) {
+            if (arr[i] < temp1) {
                 indexOfMinValue = i;
                 temp1 = arr[i];
             }
@@ -107,8 +109,8 @@ public class TrainingTasks {
     public static int findMaxValueInArray(int[] arr) {
         int indexOfMaxValue = 0;
         int temp1 = arr[0];
-        for(int i = 0; i < arr.length; i++) {
-            if(arr[i] > temp1) {
+        for (int i = 0; i < arr.length; i++) {
+            if (arr[i] > temp1) {
                 indexOfMaxValue = i;
                 temp1 = arr[i];
             }
@@ -133,7 +135,7 @@ public class TrainingTasks {
         double sumOfElements = 0;
         double averageOfElements = 0;
 
-        for(int i = 0; i < arr.length; i++) {
+        for (int i = 0; i < arr.length; i++) {
             sumOfElements += arr[i];
         }
         averageOfElements = sumOfElements / arr.length;
@@ -203,42 +205,42 @@ public class TrainingTasks {
 
     // сортування масиву за спаданням бульбашкою
 
-    public static int[] bubbleSortDesc(int[] arr){
-        int lenghtOfArray = arr.length;
+    public static int[] bubbleSortDesc(int[] arr) {
+        int[] sortedArray = new int[arr.length];
+        System.arraycopy(arr, 0, sortedArray, 0, arr.length);
         int swap;
 
-        for(int i = 0; i < lenghtOfArray; i++) {
-            for(int j = 0; j < lenghtOfArray - i - 1; j++) {
-                if(arr[j] > arr[j + 1]) {
-                    swap = arr[j];
-                    arr[j] = arr[j + 1];
-                    arr[j + 1] = swap;
+        for (int i = 0; i < sortedArray.length; i++) {
+            for (int j = 0; j < sortedArray.length - i - 1; j++) {
+                if (sortedArray[j] > sortedArray[j + 1]) {
+                    swap = sortedArray[j];
+                    sortedArray[j] = sortedArray[j + 1];
+                    sortedArray[j + 1] = swap;
                 }
             }
         }
-        return arr;
+        return sortedArray;
     }
 
     // сортування масиву за зростанням бульбашкою
 
     public static int[] bubbleSortAsc(int[] arr) {
         int swap;
-
-        for(int i = 0; i < arr.length; i++) {
-            for(int j = 0; j < arr.length - i - 1; j++) {
-                if(arr[j] < arr[j + 1]) {
-                    swap = arr[j];
-                    arr[j] = arr[j + 1];
-                    arr[j + 1] = swap;
+        int[] sortedArray = new int[arr.length];
+        System.arraycopy(arr, 0, sortedArray, 0, arr.length);
+        for (int i = 0; i < sortedArray.length; i++) {
+            for (int j = 0; j < sortedArray.length - i - 1; j++) {
+                if (sortedArray[j] < sortedArray[j + 1]) {
+                    swap = sortedArray[j];
+                    sortedArray[j] = sortedArray[j + 1];
+                    sortedArray[j + 1] = swap;
                 }
             }
         }
-        return arr;
+        return sortedArray;
     }
 
-    // знайти перший додатній елемент
-
-    //TODO нема перевірки на всі від'ємні
+    // знайти перший додатній елемент TODO нема перевірки на всі від'ємні. мені за це соромно
 
     public static int takeFirstPositiveElement(int[] arr) {
         int firstPositiveElement = 0;
@@ -252,10 +254,7 @@ public class TrainingTasks {
         return firstPositiveElement;
     }
 
-    // знайти останній від'ємний елемент
-
-    // TODO зробити іншим способом
-    // TODO перевірка
+    // знайти останній від'ємний елемент TODO перевірка
 
     public static int takeLastNegativeElement(int[] arr) {
         int lastNegativeElement = 0;
@@ -270,9 +269,8 @@ public class TrainingTasks {
     }
 
     // знайти індекси входження елемента в масив
-    // TODO рагульня якась, а не рішення
 
-    public static int[] getIndexesOfElementInArray (int[] arr, int element) {
+    public static int[] getIndexesOfElementInArray(int[] arr, int element) {
         int count = 0;
         for (int i = 0; i < arr.length; i++) {
             if (arr[i] == element) {
@@ -288,18 +286,16 @@ public class TrainingTasks {
         }
         return newArray;
     }
+
     // перевірити масив на впорядкованість за зростанням / спаданням
 
-    enum SortType
-    {
+    enum SortType {
         Ascending,
         Descending
     }
 
-    public static boolean isArraySorted(int[] arr, SortType sortType)
-    {
-        for (int i = 0; i < arr.length - 2; i++)
-        {
+    public static boolean isArraySorted(int[] arr, SortType sortType) {
+        for (int i = 0; i < arr.length - 2; i++) {
             if (!((arr[i] <= arr[i + 1] && sortType == SortType.Ascending) || (arr[i] >= arr[i + 1] && sortType == SortType.Descending)))
                 return false;
         }
@@ -307,17 +303,44 @@ public class TrainingTasks {
         return true;
     }
 
-    // TODO циклічний зсув елементів на к позицій вправо
+    // циклічний зсув елементів на к позицій вправо
+    public static int[] cycleShift(int[] arr, int n) {
+        int[] newArray = new int[arr.length];
+        System.arraycopy(arr, 0, newArray, 0, arr.length);
+        for (int i = 0; i < n; i++) {
+            int temp = newArray[newArray.length - 1];
+            for (int j = newArray.length - 1; j > 0; j--) {
+                newArray[j] = newArray[j - 1];
+            }
+            newArray[0] = temp;
+        }
+        return newArray;
+    }
 
-    // TODO вивести елементи, значення яких дорівнюють іншим елементам в масиві
+    // вивести елементи, значення яких дорівнюють іншим елементам в масиві
 
-//    public static List findNotUniqueElements (int[] arr) {
-//        List<Integer> notUniqueElements = new ArrayList();
-//        boolean flag = false;
-//        for (int i = 0; i < arr.length; i++) {
-//            if (arr[i] !=)
-//        }
-//    }
+    public static List nonUniqueElements(int[] arr) {
+        int temp;
+        List<Integer> nonUniqueElements = new ArrayList();
+
+        for (int i = 0; i < arr.length; i++) {
+            boolean flag = false;
+            temp = arr[i];
+
+            for (int j = 0; j < arr.length; j++) {
+                if (temp == arr[j]) {
+                    if (i != j) {
+                        flag = true;
+                        break;
+                    }
+                }
+            }
+            if (flag == true && !(nonUniqueElements.contains(temp))) {
+                    nonUniqueElements.add(temp);
+            }
+        }
+        return nonUniqueElements;
+    }
 
     // знайти кількість елементів, більших за середнє значення
 
@@ -325,34 +348,40 @@ public class TrainingTasks {
         double averageOfArray = getAverageOfElements(arr);
         int count = 0;
         for (int i = 0; i < arr.length; i++) {
-            if(arr[i] > averageOfArray) {
+            if (arr[i] > averageOfArray) {
                 count++;
             }
         }
         return count;
     }
 
-    // TODO вивести елементи, значення яких не дорівнюють значенням інших елементів в масиві
+    // вивести елементи, значення яких не дорівнюють значенням інших елементів в масиві
 
+    public static List uniqueElements(int[] arr) {
+        int temp;
+        List<Integer> uniqueElements = new ArrayList();
+
+        for (int i = 0; i < arr.length; i++) {
+            boolean flag = true;
+            temp = arr[i];
+
+            for (int j = 0; j < arr.length; j++) {
+                if (temp == arr[j]) {
+                    if (i != j) {
+                        flag = false;
+                        break;
+                    }
+                }
+            }
+            if (flag == true) {
+                uniqueElements.add(temp);
+            }
+        }
+        return uniqueElements;
+    }
 
 
     // TODO вивести елементи одного масиву, які не дорівнюють елементам другого масиву
-
-    // TODO не працює алгоритм
-
-//    public static List uniqueElements (int[] arr, int[] arr1) {
-//        List<Integer> uniqueElements = new ArrayList();
-//        for (int i = 0; i < arr.length; i++) {
-//            for (int j = 0; j < arr1.length; j++) {
-//
-////                if (arr[i] != arr1[j]) {
-////                    j++;
-////                }
-//                //uniqueElements.add(arr[i]);
-//            }
-//        }
-//        return uniqueElements;
-//    }
 
     // порахувати скільки в масиві елементів з таким же значенням, як і перший
 
@@ -368,226 +397,26 @@ public class TrainingTasks {
 
     // TODO з двох відсортованих масивів зробити третій відсортований, не сортуючи його
 
-    // TODO поміняти місцями перший додатній елемент з останнім, другий з передостаннім...
+    // поміняти місцями перший додатній елемент з останнім, другий з передостаннім...
 
-//    public static int[] swapPositiveElements(int[] arr) {
-//        int swap = 0;
-//        int i = 0;
-//        int j = 0;
-//        for (i = 0; i < arr.length; i++) {
-//            if (arr[i] % 2 == 0) {
-//                swap = arr[i];
-//                for (j = arr.length - 1; j >=0; j--) {
-//                    if (arr[j] % 2 == 0) {
-//                        arr[i] = arr[j];
-//                        arr[j] = swap;
-//                    }
-//                }
-//            }
-//        }
-//
-//        return arr;
-//    }
+    public static int[] swapPositiveElements(int[] arr) {
+        int count = 0;
+        int[] newArray = new int[arr.length];
+        System.arraycopy(arr, 0, newArray, 0, arr.length);
 
-////////////////////////////////////////////////////////////////////////////////////////////
-// знайти індекс входження елемента в масив
-
-
-
-    /*// знайти максимальне значення елемента в масиві
-
-    int[] newArray2 = new int[] {-10, 8, 9, 5, 6, 3, 2, 7};
-    int temp2 = newArray2[0];
-    for(int i = 0; i < newArray2.length; i++) {
-        if (newArray2[i] > temp2) {
-            temp2 = newArray2[i];
-        }
-    }
-
-    // знайти мінімальне значення елемента в масиві
-
-    int[] newArray3 = new int[] {-10, 8, 9, 5, 6, 3, 2, -17};
-    int temp3 = newArray3[0];
-    for(int i = 0; i < newArray3.length; i++) {
-        if (newArray3[i] < temp3) {
-            temp3 = newArray3[i];
-        }
-    }
-
-    // замінити нулями всі парні елементи в масиві
-
-    int[] newArray4 = new int[] {-10, 8, 9, 5, 6, 3, 2, 7};
-    int[] changedArray1 = new int[newArray4.length];
-
-    for(int i = 0; i < newArray4.length; i++) {
-        changedArray1[i] = (newArray4[i] % 2 == 0) ? 0 : newArray4[i];
-    }
-
-    // замінити нулями всі непарні елементи в масиві
-
-    int[] newArray5 = new int[] {-10, 8, 9, 5, 6, 3, 2, 7};
-    int[] changedArray2 = new int[newArray5.length];
-
-    for(int i = 0; i < newArray5.length; i++) {
-        changedArray2[i] = (newArray5[i] % 2 != 0) ? 0 : newArray5[i];
-    }
-
-    // знайти індекс мінімального значення елемента в масиві
-
-    int[] newArray6 = new int[] {-10, 8, -39, 5, 6, 3, 2, -7};
-    int indexOfMinValue = 0;
-    int temp4 = newArray6[0];
-    for(int i = 0; i < newArray6.length; i++) {
-        if(newArray6[i] < temp4) {
-            indexOfMinValue = i;
-            temp4 = newArray6[i];
-        }
-    }
-
-    // знайти індекс максимального значення елемента в масиві
-
-    int[] newArray7 = new int[] {-10, 8, -39, 5, 6, 3, 2, 777};
-    int indexOfMaxValue = 0;
-    int temp5 = newArray7[0];
-    for(int i = 0; i < newArray7.length; i++) {
-        if(newArray7[i] > temp5) {
-            indexOfMaxValue = i;
-            temp5 = newArray7[i];
-        }
-    }
-
-    // сортування масиву за спаданням бульбашкою
-
-    int[] newArray8 = new int[] {-5, -10, 8, -39, 5, 6, 3, 2, 777, 15};
-    int lenghtOfArray = newArray8.length;
-    int swap;
-
-    for(int i = 0; i < lenghtOfArray; i++) {
-        for(int j = 0; j < lenghtOfArray - i - 1; j++) {
-            if(newArray8[j] > newArray8[j + 1]) {
-                swap = newArray8[j];
-                newArray8[j] = newArray8[j + 1];
-                newArray8[j + 1] = swap;
+        for (int i = 0; i < newArray.length - 1 - count; i++) {
+            if (newArray[i] > 0) {
+                int temp = newArray[i];
+                for (int j = newArray.length - 1 - count; j > i; j--) {
+                    if (newArray[j] > 0) {
+                        newArray[i] = newArray[j];
+                        newArray[j] = temp;
+                        count++;
+                        break;
+                    }
+                }
             }
         }
+        return newArray;
     }
-
-    // сортування масиву за зростанням бульбашкою
-
-    int[] newArray9 = new int[] {-5, -10, 8, -39, 5, 6, 3, 2, 777, 15};
-    int swap2;
-
-    for(int i = 0; i < newArray9.length; i++) {
-        for(int j = 0; j < newArray9.length - i - 1; j++) {
-            if(newArray9[j] < newArray9[j + 1]) {
-                swap2 = newArray9[j];
-                newArray9[j] = newArray9[j + 1];
-                newArray9[j + 1] = swap2;
-            }
-        }
-    }
-
-    // знайти суму елементів масиву
-
-    int[] newArray10 = new int[] {-5, -10, 8, -39, 5, 6, 3, 2, 777, 15};
-    int sumOfElements = 0;
-
-    for(int i = 0; i < newArray10.length; i++) {
-        sumOfElements += newArray10[i];
-    }
-
-    // знайти середнє значення елементів в масиві
-
-    int[] newArray11 = new int[] {-5, -10, 8, -39, 5, 6, 3, 2, 777, 15, 5};
-    int count = 0;
-    double sumOfElements1 = 0;
-    double averageOfElements1 = 0;
-
-    for(int i = 0; i < newArray11.length; i++) {
-        sumOfElements1 += newArray11[i];
-        count++;
-    }
-    averageOfElements1 = sumOfElements1 / count;
-
-    // порахувати кількість елементів, що рівні заданому
-
-    int[] newArray12 = new int[] {-5, -10, 8, -39, 5, 6, 3, 2, 777, 15, 5, 5};
-    int count1 = 0;
-    int n1 = 5;
-
-    for(int i = 0; i < newArray12.length; i++) {
-        if (newArray12[i] == n1) {
-            count1++;
-        }
-    }
-
-    // порахувати кількість елементів, рівних нулю
-
-    int[] newArray13 = new int[] {-5, -10, 8, 0, 5, 0, 0, 2, 777, 15, 0, 0};
-    int count2 = 0;
-
-    for (int i = 0; i < newArray13.length; i++) {
-        if (newArray13[i] == 0) {
-            count2++;
-        }
-    }
-
-    // порахувати кількість елементів, більших нуля
-
-    int[] newArray14 = new int[] {-5, -10, 8, -39, 5, 6, 3, 2, 777, 15, 5, 5};
-    int count3 = 0;
-
-    for (int i = 0; i < newArray14.length; i++) {
-        if (newArray14[i] > 0) {
-            count3++;
-        }
-    }
-
-    // помножити елементи масиву на число
-
-    int[] newArray15 = new int[] {-5, -10, 8, -39, 5, 6, 3, 2, 777, 15, 5, 5};
-    int[] multipliedArray = new int[newArray15.length];
-    int n3 = 2;
-
-    for (int i = 0; i < newArray15.length; i++) {
-        multipliedArray[i] = newArray15[i] * n3;
-    }
-
-    // додати до елементів масиву їх індекси
-
-    int[] newArray16 = new int[] {-5, -10, 8, -39, 5, 6, 3, 2, 777, 15, 5, 5};
-    int[] sumOfElementsAndIndexes = new int[newArray16.length];
-
-    for (int i = 0; i < newArray16.length; i++) {
-        sumOfElementsAndIndexes[i] = newArray16[i] + i;
-    }
-
-    // знайти перший додатній елемент
-
-    //TODO нема перевірки на всі від'ємні
-
-    int[] newArray17 = new int[] {-5, -10, 8, -39, 5, -6, -3, -2, -777, 15, -5, 5};
-    int firstPositiveElement = 0;
-
-    for (int i = 0; i < newArray17.length; i++) {
-        if (newArray17[i] > 0) {
-            firstPositiveElement = newArray17[i];
-            break;
-        }
-    }
-
-    // знайти останній від'ємний елемент
-
-    // TODO зробити іншим способом
-
-    int[] newArray18 = new int[] {-5, -10, 8, -39, 5, 6, -3, 2, -777, 15, -5, 5};
-    int lastNegativeElement = 0;
-
-    for (int i = newArray18.length - 1; i > 0; i--) {
-        if (newArray18[i] < 0) {
-            lastNegativeElement = newArray18[i];
-            break;
-        }
-    }
-    */
-    }
+}
